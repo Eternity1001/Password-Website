@@ -9,11 +9,12 @@
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/signup.css') }}"
+
     >
 </head>
 
 <body>
-
+    <script src="{{ url_for('static', filename='js/signup.js') }}" defer></script>
     <div class="signup-container">
         <h1>Create an Account</h1>
 
@@ -21,7 +22,7 @@
             <div class="error">{{ error }}</div>
         {% endif %}
 
-        <form method="POST">
+        <form method="POST" id="myForm">
 
             <div class="form-group">
                 <label for="email">Email</label>
@@ -66,7 +67,10 @@
                     required
                 >
             </div>
-
+            <div>
+                <p id="password_status"> </p>
+            
+            </div>
             <button type="submit">Sign Up</button>
 
         </form>

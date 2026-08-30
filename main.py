@@ -24,9 +24,7 @@ def signup():
 
         print(username_or_email)
         print(password)
-
-        return "Sign in successful!"
-
+        return render_template("signin.html")
     return render_template("signup.html")
 
 @app.route("/forgot-username")
@@ -40,4 +38,6 @@ def forgot_password():
 
 
 if __name__ == "__main__":
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
     app.run(debug=True)
