@@ -43,16 +43,19 @@ def search_account_entries(database_name, search_field, search_data):
     status, cur, con = create_database(database_name)
 
     if status:
-        cur.execute(f"SELECT * FROM users WHERE {search_field} = ?", (search_data,))
+        cur.execute(f"SELECT * FROM users WHERE ({search_field})", (search_data,))
         user = cur.fetchone()
-        print(user)
         con.close()
+        return True, user
+
+    return False, None
+
         
     
 # create_account_db("account")
 
-add_account_entries("account", f"{uuid.uuid4()}", "test@test.com", "hello", "yea","","","")
-search_account_entries("account", "username", "hello" )
+# add_account_entries("account", f"{uuid.uuid4()}", "test@test.com", "hello", "yea","","","")
+# search_account_entries("account", "username", "hello" )
 
 # sleep(2)
 
