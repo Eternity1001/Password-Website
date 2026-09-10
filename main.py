@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-
+from server_side.password import create_account
 app = Flask(__name__)
 
 
@@ -38,6 +38,7 @@ def forgot_password():
 
 
 if __name__ == "__main__":
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-    app.run(debug=True)
+    create_account("asd", "asd", "asd","asd")
+    # app.config['TEMPLATES_AUTO_RELOAD'] = True
+    # app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+    # app.run(debug=True)
