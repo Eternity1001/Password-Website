@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-from server_side.password import create_account
+from server_side.password import *
+from server_side.database import *
 app = Flask(__name__)
 
 
@@ -38,7 +39,11 @@ def forgot_password():
 
 
 if __name__ == "__main__":
-    create_account("asd", "asd", "asd","asd")
+    # print_all_database_enteries('account', 'users')
+    # login("test@test.com", "password")
+    create_account(email="test1@test.com", username="test", password="password", confirm_password="password")
+    # status, user = search_account_entries("account", "username = ? AND email = ?", ("test", "test@test.com"))
+    # print(status, user)
     # app.config['TEMPLATES_AUTO_RELOAD'] = True
     # app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
     # app.run(debug=True)

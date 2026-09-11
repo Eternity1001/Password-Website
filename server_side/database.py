@@ -1,5 +1,4 @@
 import sqlite3
-import uuid
 from pathlib import Path
 from sqlite3 import Connection, Cursor
 
@@ -36,7 +35,7 @@ def fresh_start(database_name: str):
     ""
 
 
-def add_account_entries(database_name: str, uuid: uuid.UUID, email: str, username: str, password: str, salt: str, account_lock: str, security_question: str) -> bool:
+def add_account_entries(database_name: str, uuid: str, email: str, username: str, password: bytes, salt: bytes, account_lock: str, security_question: str) -> bool:
     status, cur, con = create_database(database_name)
     if status and cur and con:
         cur.execute(
@@ -48,7 +47,7 @@ def add_account_entries(database_name: str, uuid: uuid.UUID, email: str, usernam
     return False
 
 
-def search_account_entries(database_name:str, search_field:str, search_data: tuple[str, ...]):
+def search_account_entries(database_name:str, search_field:str, search_data: tuple[str, ...]) -> tuple[bool, any]:
     status, cur, con = create_database(database_name)
 
     if status and cur and con:
@@ -61,6 +60,16 @@ def search_account_entries(database_name:str, search_field:str, search_data: tup
 
     return False, None
 
+def print_all_database_enteries(database:str, table_name:str):
+    status, cur, con = create_database(database)
+    if status and cur and con:
+        cur.execute(f"SELECT * FROM {table_name}")
+        rows = cur.fetchall()
+        for row in rows:
+            print(row) 
+        con.close()
+    return 
+        
 # # add_account_entries("account", f"{uuid.uuid4()}", "test@test.com", "hello", "yea","","","")
 # # search_account_entries("account", "username", "hello" )
 
